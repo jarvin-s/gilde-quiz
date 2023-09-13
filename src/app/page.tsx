@@ -3,15 +3,7 @@ import { ThemeToggle } from '@/components/ThemeToggle'
 import { Icons } from '@/components/icons'
 import { Button } from '@/components/ui/button'
 import { Card, CardContent, CardFooter, CardHeader, CardTitle } from '@/components/ui/card'
-import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuTrigger } from '@radix-ui/react-dropdown-menu'
 import { signIn } from 'next-auth/react'
-
-// const text = [
-//   {
-//   title: "test",
-//   description: "123"
-//   }
-// ]
 
 export default function Home() {
   return (
@@ -21,14 +13,19 @@ export default function Home() {
           <CardHeader>
             <CardTitle className='text-center'>Sign in</CardTitle>
           </CardHeader>
-          <CardContent>
-            <Button className='items-center' onClick={() => signIn("github")}>
+          <CardContent className='flex flex-col items-center'>
+            <Button className='mb-4' onClick={() => signIn("github")}>
               <Icons.gitHub className='mr-2 h-4 w-4' />
               Continue with GitHub
             </Button>
-              <ThemeToggle/>
+            <Button className='' onClick={() => signIn("google")}>
+              <Icons.google className='mr-2 h-4 w-4' />
+              Continue with Google
+            </Button>
           </CardContent>
-          <CardFooter></CardFooter>
+          <CardFooter className='flex justify-end'>
+            <ThemeToggle />
+          </CardFooter>
         </Card>
       </div>
     </main>
