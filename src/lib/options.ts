@@ -6,7 +6,7 @@ import { PrismaClient } from "@prisma/client"
 
 const prisma = new PrismaClient()
 
-export const options: NextAuthOptions = {
+export const authOptions: NextAuthOptions = {
     adapter: PrismaAdapter(prisma),
     providers: [
         GitHubProvider({
@@ -21,7 +21,5 @@ export const options: NextAuthOptions = {
     session: {
         strategy: "jwt"
     },
-    jwt: {
-        secret: process.env.NEXTAUTH_SECRET,
-    },
+    secret: process.env.NEXTAUTH_SECRET,
 }
