@@ -1,11 +1,14 @@
 import { cn } from '@/lib/utils'
 import './globals.css'
 import type { Metadata } from 'next'
-import { Inter } from 'next/font/google'
+import { Mooli } from 'next/font/google'
 import Providers from '@/components/Providers'
 import Navbar from '@/components/Navbar'
 
-const inter = Inter({ subsets: ['latin'] })
+const mooli = Mooli({
+  subsets: ['latin'],
+  weight: '400',
+})
 
 export const metadata: Metadata = {
   title: 'Gilde Quiz',
@@ -19,7 +22,7 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en">
-      <body className={cn(inter.className, 'antialiased min-h-screen pt-16')}>
+      <body className={cn(mooli.className, 'antialiased min-h-screen pt-16')}>
         <Navbar />
         <Providers>
           {children}
