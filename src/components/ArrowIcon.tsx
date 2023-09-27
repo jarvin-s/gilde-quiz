@@ -1,12 +1,12 @@
 'use client'
 
-import { Icon } from '@iconify/react'
+import { ArrowSmallRightIcon } from '@heroicons/react/24/solid'
 import React from 'react'
 
 const ArrowIcon = () => {
     return (
         <div>
-            <Icon className='arrow-icon' icon='mdi:arrow-right-thick'/>
+            <ArrowSmallRightIcon className='h-6 w-6 duration-300 hover:translate-x-1' />
         </div>
     )
 }
