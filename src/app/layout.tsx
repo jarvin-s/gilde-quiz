@@ -6,28 +6,33 @@ import Providers from '@/components/Providers'
 import Navbar from '@/components/Navbar'
 
 const mooli = Mooli({
-  subsets: ['latin'],
-  weight: '400',
+    subsets: ['latin'],
+    weight: '400',
 })
 
 export const metadata: Metadata = {
-  title: 'Gilde Quiz',
-  description: 'Quiz application built as final school project',
+    title: 'Gilde Quiz',
+    description: 'Quiz application built as final school project',
 }
 
 export default function RootLayout({
-  children,
+    children,
 }: {
-  children: React.ReactNode
+    children: React.ReactNode
 }) {
-  return (
-    <html lang="en">
-      <body className={cn(mooli.className, 'antialiased min-h-screen pt-16')}>
-        <Navbar />
-        <Providers>
-          {children}
-        </Providers>
-      </body>
-    </html>
-  )
+    return (
+        <html lang='en'>
+            <body
+                className={cn(
+                    mooli.className,
+                    'min-h-screen pt-16 antialiased'
+                )}
+            >
+                <Providers>
+                    <Navbar />
+                    {children}
+                </Providers>
+            </body>
+        </html>
+    )
 }

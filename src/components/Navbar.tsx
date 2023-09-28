@@ -2,12 +2,13 @@ import Link from 'next/link'
 import React from 'react'
 import { getServerSession } from 'next-auth'
 import SignOut from './SignOut'
+import { ThemeToggle } from './ThemeToggle'
 
 const Navbar = async () => {
     const session = await getServerSession()
     return (
         <div className='fixed inset-x-0 top-0 border-b-2 py-3'>
-            <div className='flex items-center justify-between h-full px-8 gap-'>
+            <div className='gap- flex h-full items-center justify-between px-8'>
                 <Link className='flex items-center gap-2' href={'/'}>
                     <p
                         className='rounded-lg border-2 border-b-4
@@ -17,11 +18,10 @@ const Navbar = async () => {
                         💭Gilde Quiz
                     </p>
                 </Link>
-                {session?.user ? (
-                    <SignOut/>
-                ) : (
-                    <></>
-                )}
+                <div className=''>
+                    <ThemeToggle />
+                    {session?.user ? <SignOut /> : <></>}
+                </div>
             </div>
         </div>
     )
