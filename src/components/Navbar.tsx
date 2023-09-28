@@ -8,7 +8,7 @@ const Navbar = async () => {
     const session = await getServerSession()
     return (
         <div className='fixed inset-x-0 top-0 border-b-2 py-3'>
-            <div className='gap- flex h-full items-center justify-between px-8'>
+            <div className='flex h-full items-center justify-between px-8'>
                 <Link className='flex items-center gap-2' href={'/'}>
                     <p
                         className='rounded-lg border-2 border-b-4
@@ -18,7 +18,7 @@ const Navbar = async () => {
                         💭Gilde Quiz
                     </p>
                 </Link>
-                <div className=''>
+                <div className='flex gap-2'>
                     <ThemeToggle />
                     {session?.user ? <SignOut /> : <></>}
                 </div>
