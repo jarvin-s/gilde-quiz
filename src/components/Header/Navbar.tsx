@@ -1,8 +1,8 @@
 import Link from 'next/link'
 import React from 'react'
 import { getServerSession } from 'next-auth'
-import SignOut from './SignOut'
-import { ThemeToggle } from './ThemeToggle'
+import SignOut from '../SignOut'
+import { ThemeToggle } from '../Theme/ThemeToggle'
 
 const Navbar = async () => {
     const session = await getServerSession()

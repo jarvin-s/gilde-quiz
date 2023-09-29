@@ -3,7 +3,7 @@ import './globals.css'
 import type { Metadata } from 'next'
 import { Mooli } from 'next/font/google'
 import Providers from '@/components/Providers'
-import Navbar from '@/components/Navbar'
+import Navbar from '@/components/Header/Navbar'
 
 const mooli = Mooli({
     subsets: ['latin'],
