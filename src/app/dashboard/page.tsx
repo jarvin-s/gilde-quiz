@@ -1,18 +1,14 @@
-'use client'
-
-import ArrowIcon from '@/components/ArrowIcon'
-import { Button } from '@/components/ui/button'
+import QuizStartButton from '@/components/Quiz/QuizStartButton'
 import { getServerSession } from 'next-auth'
-import { useRouter, redirect } from 'next/navigation'
+import { redirect } from 'next/navigation'
 import React from 'react'
 
-const Dashboard = () => {
-    const router = useRouter()
-    // const session = await getServerSession()
+const Dashboard = async () => {
+    const session = await getServerSession()
 
-    // if (!session?.user) {
-    //     redirect('/')
-    // }
+    if (!session?.user) {
+        redirect('/')
+    }
 
     return (
         <div className='container relative mx-auto overflow-hidden px-6 py-12 sm:py-16'>
@@ -26,15 +22,7 @@ const Dashboard = () => {
                         with my app!
                     </h1>
                     <div className='pt-4'>
-                        <Button
-                            className='btn-start font-extrabold uppercase'
-                            onClick={() => {
-                                router.push('/quiz')
-                            }}
-                        >
-                            Start quiz
-                            <ArrowIcon />
-                        </Button>
+                        <QuizStartButton/>
                     </div>
                 </div>
             </div>
