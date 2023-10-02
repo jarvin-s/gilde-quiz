@@ -1,11 +1,19 @@
-import React from 'react'
+import QuizCreation from '@/components/Quiz/QuizCreation'
+import { getServerSession } from 'next-auth'
+import { redirect } from 'next/navigation'
 
-type Props = {}
+const Quiz = async () => {
+    const session = await getServerSession()
 
-const Quiz = (props: Props) => {
-  return (
-    <div>Quiz</div>
-  )
+    if (!session?.user) {
+        redirect('/')
+    }
+
+    return (
+        <>
+            <QuizCreation />
+        </>
+    )
 }
 
 export default Quiz
