@@ -4,20 +4,20 @@ import React from 'react'
 import { Button } from '../ui/button'
 import ArrowIcon from '../ArrowIcon'
 import { useRouter } from 'next/navigation'
-import { CATEGORIES } from '@/constants'
+import {
+    DropdownMenu,
+    DropdownMenuContent,
+    DropdownMenuItem,
+    DropdownMenuLabel,
+    DropdownMenuSeparator,
+    DropdownMenuTrigger,
+} from '@radix-ui/react-dropdown-menu'
 
 const QuizStartButton = () => {
     const router = useRouter()
 
     return (
         <div>
-            <ul>
-                {CATEGORIES.map((category) => (
-                    <li key={category.key}>
-                        Category: {category.text}, Value: {category.value}
-                    </li>
-                ))}
-            </ul>
             <Button
                 className='btn-start font-extrabold uppercase'
                 onClick={() => {
