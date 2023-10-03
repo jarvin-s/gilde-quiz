@@ -1,13 +1,14 @@
-"use client"
+'use client'
 
 import React from 'react'
-import { signOut } from "next-auth/react"
+import { signOut } from 'next-auth/react'
 import { Button } from './ui/button'
 
 const SignOut = () => {
-
     return (
-        <div><Button onClick={() => signOut()}>Sign out</Button></div>
+        <div>
+            <Button onClick={() => signOut()}>Sign out</Button>
+        </div>
     )
 }
 
