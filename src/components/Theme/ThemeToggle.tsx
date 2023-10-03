@@ -3,7 +3,6 @@
 import * as React from 'react'
 import { MoonIcon, SunIcon } from '@heroicons/react/24/solid'
 import { useTheme } from 'next-themes'
-
 import { Button } from '@/components/ui/button'
 import {
     DropdownMenu,
@@ -11,12 +10,18 @@ import {
     DropdownMenuItem,
     DropdownMenuTrigger,
 } from '@/components/ui/dropdown-menu'
+import { Switch } from '../ui/switch'
 
 export function ThemeToggle() {
     const { setTheme } = useTheme()
 
     return (
-        <div>
+        <>
+            <div className='flex items-center space-x-2'>
+                <Switch onClick={() => setTheme('light')} />
+                <MoonIcon className='absolute h-[1.2rem] w-[1.2rem] rotate-90 scale-0 transition-all duration-200 dark:rotate-0 dark:scale-100' />
+                <SunIcon className='h-[1.2rem] w-[1.2rem] rotate-0 scale-100 transition-all dark:-rotate-90 dark:scale-0' />
+            </div>
             <DropdownMenu>
                 <DropdownMenuTrigger asChild>
                     <Button variant='outline' size='icon'>
@@ -37,6 +42,6 @@ export function ThemeToggle() {
                     </DropdownMenuItem>
                 </DropdownMenuContent>
             </DropdownMenu>
-        </div>
+        </>
     )
 }
