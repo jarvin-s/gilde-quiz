@@ -5,25 +5,23 @@ import * as z from 'zod'
 import CATEGORIES from '@/constants/categories'
 import { Button } from '@/components/ui/button'
 import { Form } from '@/components/ui/form'
-import { Input } from '@/components/ui/input'
+import { Dropdown, DropdownChangeEvent } from 'primereact/dropdown'
 import { useForm } from 'react-hook-form'
-import {
-    DropdownMenu,
-    DropdownMenuContent,
-    DropdownMenuItem,
-    DropdownMenuLabel,
-    DropdownMenuSeparator,
-    DropdownMenuTrigger,
-} from '@radix-ui/react-dropdown-menu'
-import React from 'react'
+import React, { useState } from 'react'
+
+interface Category {
+    key: number
+    text: string
+    value: number
+}
 
 const formSchema = z.object({
     category: z.string(),
 })
 
 export function QuizCreation() {
-    const [open, setOpen] = React.useState(false)
-    const [value, setValue] = React.useState('')
+    // const [category, setCategory] = useState<Category | null>(null)
+    // const { category, setCategory } = React.useContext()
 
     const form = useForm<z.infer<typeof formSchema>>({
         resolver: zodResolver(formSchema),
@@ -35,32 +33,33 @@ export function QuizCreation() {
     function onSubmit(values: z.infer<typeof formSchema>) {
         // Do something with the form values.
         // ✅ This will be type-safe and validated.
-        
     }
 
     return (
+        // <div className='flex items-center justify-center p-24'>
+        //     <Dropdown
+        //         value={category}
+        //         onChange={(e) => setCategory(e.value)}
+        //         options={CATEGORIES}
+        //         optionLabel='option'
+        //         placeholder='Select Quiz Category'
+        //     />
+        // </div>
         <div className='flex min-h-screen justify-center p-24'>
+            {/* <Dropdown
+                value={categories}
+                onChange={(e) => setCategory(e.value)}
+                options={CATEGORIES}
+                optionLabel='name'
+                placeholder='Select a City'
+                className='md:w-14rem w-full'
+            /> */}
             <Form {...form}>
                 <form
                     onSubmit={form.handleSubmit(onSubmit)}
                     className='space-y-8'
                 >
-                    <DropdownMenu>
-                        <DropdownMenuTrigger asChild>
-                            <Button variant='outline'>Category</Button>
-                        </DropdownMenuTrigger>
-                        <DropdownMenuContent className='w-56'>
-                            <DropdownMenuSeparator />
-                            {CATEGORIES.map((category) => (
-                                <DropdownMenuItem
-                                    key={category.key}
-                                    // onSelect={currentValue}
-                                >
-                                    {category.text}
-                                </DropdownMenuItem>
-                            ))}
-                        </DropdownMenuContent>
-                    </DropdownMenu>
+                    <div className='card justify-content-center flex'></div>
                     <Button className='uppercase' type='submit'>
                         Begin
                     </Button>

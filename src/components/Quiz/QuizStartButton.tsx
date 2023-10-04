@@ -4,14 +4,6 @@ import React from 'react'
 import { Button } from '../ui/button'
 import ArrowIcon from '../ArrowIcon'
 import { useRouter } from 'next/navigation'
-import {
-    DropdownMenu,
-    DropdownMenuContent,
-    DropdownMenuItem,
-    DropdownMenuLabel,
-    DropdownMenuSeparator,
-    DropdownMenuTrigger,
-} from '@radix-ui/react-dropdown-menu'
 
 const QuizStartButton = () => {
     const router = useRouter()

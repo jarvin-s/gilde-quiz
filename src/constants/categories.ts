@@ -1,4 +1,4 @@
-const CATEGORIES = [
+export const CATEGORIES = [
     {
         key: '0',
         text: 'Any Category',
