@@ -9,6 +9,8 @@ import { Dropdown, DropdownChangeEvent } from 'primereact/dropdown'
 import { useForm } from 'react-hook-form'
 import React, { useState } from 'react'
 
+export function QuizCreation() {
+    const [data, setData] = useState([])
 interface Category {
     key: number
     text: string
@@ -19,7 +21,24 @@ const formSchema = z.object({
     category: z.string(),
 })
 
-export function QuizCreation() {
+const fetchData = async () => {
+
+    // const api = `https://opentdb.com/api.php?amount=${amount}}&category=${category}&difficulty=${difficulty}&type=multiple`
+    const api = `https://opentdb.com/api.php?amount=13&category=23&difficulty=easy&type=multiple`
+
+    try {
+        const response = await fetch(api)
+        if (response.ok) {
+            const data = await response.json()
+            setData(data)
+        }
+    } catch (error) {
+        console.log(error)
+    }
+}
+
+fetchData()
+
     // const [category, setCategory] = useState<Category | null>(null)
     // const { category, setCategory } = React.useContext()
 
@@ -36,15 +55,6 @@ export function QuizCreation() {
     }
 
     return (
-        // <div className='flex items-center justify-center p-24'>
-        //     <Dropdown
-        //         value={category}
-        //         onChange={(e) => setCategory(e.value)}
-        //         options={CATEGORIES}
-        //         optionLabel='option'
-        //         placeholder='Select Quiz Category'
-        //     />
-        // </div>
         <div className='flex min-h-screen justify-center p-24'>
             {/* <Dropdown
                 value={categories}
