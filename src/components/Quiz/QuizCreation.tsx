@@ -1,80 +1,45 @@
 'use client'
 
-import { zodResolver } from '@hookform/resolvers/zod'
-import * as z from 'zod'
-import CATEGORIES from '@/constants/categories'
-import { Button } from '@/components/ui/button'
-import { Form } from '@/components/ui/form'
-import { Dropdown, DropdownChangeEvent } from 'primereact/dropdown'
-import { useForm } from 'react-hook-form'
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
+import { QuestionsResponse } from '@/types/Question' // Adjust the import path as needed
 
-export function QuizCreation() {
-    const [data, setData] = useState([])
-interface Category {
-    key: number
-    text: string
-    value: number
-}
+const QuizCreation = () => {
+    const [data, setData] = useState<QuestionsResponse[]>([])
+    const [curr, setCurr] = useState(0)
+    const amount = 5
 
-const formSchema = z.object({
-    category: z.string(),
-})
+    useEffect(() => {
+        const fetchData = async () => {
+            const api = `https://opentdb.com/api.php?amount=${amount}&category=23&difficulty=easy&type=multiple`
 
-const fetchData = async () => {
-
-    // const api = `https://opentdb.com/api.php?amount=${amount}}&category=${category}&difficulty=${difficulty}&type=multiple`
-    const api = `https://opentdb.com/api.php?amount=13&category=23&difficulty=easy&type=multiple`
-
-    try {
-        const response = await fetch(api)
-        if (response.ok) {
-            const data = await response.json()
-            setData(data)
+            try {
+                const response = await fetch(api)
+                if (response.ok) {
+                    const data = await response.json()
+                    setData(data.results)
+                }
+            } catch (error) {
+                console.log(error)
+            }
         }
-    } catch (error) {
-        console.log(error)
-    }
-}
 
-fetchData()
-
-    // const [category, setCategory] = useState<Category | null>(null)
-    // const { category, setCategory } = React.useContext()
-
-    const form = useForm<z.infer<typeof formSchema>>({
-        resolver: zodResolver(formSchema),
-        defaultValues: {
-            category: '',
-        },
-    })
-
-    function onSubmit(values: z.infer<typeof formSchema>) {
-        // Do something with the form values.
-        // ✅ This will be type-safe and validated.
-    }
+        fetchData()
+    }, [])
 
     return (
         <div className='flex min-h-screen justify-center p-24'>
-            {/* <Dropdown
-                value={categories}
-                onChange={(e) => setCategory(e.value)}
-                options={CATEGORIES}
-                optionLabel='name'
-                placeholder='Select a City'
-                className='md:w-14rem w-full'
-            /> */}
-            <Form {...form}>
-                <form
-                    onSubmit={form.handleSubmit(onSubmit)}
-                    className='space-y-8'
-                >
-                    <div className='card justify-content-center flex'></div>
-                    <Button className='uppercase' type='submit'>
-                        Begin
-                    </Button>
-                </form>
-            </Form>
+            <div className='flex flex-col gap-10'>
+                <ul>
+                    {data.map((question, index) => (
+                        <li key={index}>
+                            <div>
+                                <p>Question: {question.question}</p>
+                                <p>Correct Answer: {question.correct_answer}</p>
+                            </div>
+                        </li>
+                    ))}
+                </ul>
+            </div>
         </div>
     )
 }
