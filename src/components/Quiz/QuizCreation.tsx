@@ -1,16 +1,29 @@
 'use client'
 
 import React, { useState, useEffect } from 'react'
-import { QuestionsResponse } from '@/types/Question' // Adjust the import path as needed
+import { QuestionsResponse } from '@/types/Question'
+import {
+    DropdownMenu,
+    DropdownMenuContent,
+    DropdownMenuTrigger,
+    DropdownMenuLabel,
+    DropdownMenuItem,
+} from '../ui/dropdown-menu'
+import { Button } from '../ui/button'
+import { CATEGORIES } from '@/constants'
+import { Dropdown } from 'primereact/dropdown'
 
 const QuizCreation = () => {
+    const [category, setCategory] = useState(null)
+    const [amount, setAmount] = useState(5)
+    const [difficulty, setDifficulty] = useState('easy')
+    const [questionsType, setQuestionsType] = useState('0')
     const [data, setData] = useState<QuestionsResponse[]>([])
     const [curr, setCurr] = useState(0)
-    const amount = 5
 
     useEffect(() => {
         const fetchData = async () => {
-            const api = `https://opentdb.com/api.php?amount=${amount}&category=23&difficulty=easy&type=multiple`
+            const api = `https://opentdb.com/api.php?amount=${amount}&category=${category}&difficulty=${difficulty}&type=${questionsType}`
 
             try {
                 const response = await fetch(api)
@@ -26,19 +39,35 @@ const QuizCreation = () => {
         fetchData()
     }, [])
 
+    const handleCategoryClick = (category: any) => {
+        setCategory(category)
+    }
+
     return (
         <div className='flex min-h-screen justify-center p-24'>
             <div className='flex flex-col gap-10'>
-                <ul>
-                    {data.map((question, index) => (
-                        <li key={index}>
-                            <div>
-                                <p>Question: {question.question}</p>
-                                <p>Correct Answer: {question.correct_answer}</p>
-                            </div>
-                        </li>
-                    ))}
-                </ul>
+                <DropdownMenu>
+                    <DropdownMenuTrigger asChild>
+                        <Button variant={'outline'}>
+                            {category ? category : 'Choose a category'}
+                        </Button>
+                    </DropdownMenuTrigger>
+                    <DropdownMenuContent>
+                        <DropdownMenuLabel className='overflow-y-auto max-h-[12rem]'>
+                            {CATEGORIES.map((category) => (
+                                <DropdownMenuItem
+                                    key={category.key}
+                                    onSelect={() =>
+                                        handleCategoryClick(category.text)
+                                    }
+                                    textValue={category.text}
+                                >
+                                    {category.text}
+                                </DropdownMenuItem>
+                            ))}
+                        </DropdownMenuLabel>
+                    </DropdownMenuContent>
+                </DropdownMenu>
             </div>
         </div>
     )
