@@ -1,14 +1,6 @@
 'use client'
 
-import React, { useState, useEffect } from 'react'
-import { QuestionsResponse } from '@/types/Question'
-import {
-    DropdownMenu,
-    DropdownMenuContent,
-    DropdownMenuTrigger,
-    DropdownMenuLabel,
-    DropdownMenuItem,
-} from '../ui/dropdown-menu'
+import React from 'react'
 import { Button } from '../ui/button'
 import { CATEGORIES } from '@/constants'
 import {
@@ -30,37 +22,22 @@ import {
     SelectTrigger,
     SelectValue,
 } from '../ui/select'
+import QuizSlider from './QuizSlider'
 
 const QuizCreation = () => {
-    const [category, setCategory] = useState(null)
-    // const [amount, setAmount] = useState(5)
-    // const [difficulty, setDifficulty] = useState('easy')
-    // const [questionsType, setQuestionsType] = useState('0')
-
-    // const formSchema = z.object({
-    //     username: z.string().min(2, {
-    //         message: 'Username must be at least 2 characters.',
-    //     }),
-    // })
-
     const form = useForm<QuizForm>({
         resolver: zodResolver(QuizFormSchema),
         defaultValues: {
             category: '',
+            difficulty: '',
+            amount: 10,
+            type: '',
         },
     })
 
-    // function onSubmit(values: z.infer<typeof formSchema>) {
-    //     console.log(values)
-    // }
-
-    const handleCategoryClick = (category: any) => {
-        setCategory(category)
-    }
-
     return (
         <div className='flex min-h-screen justify-center p-24'>
-            <div className='flex flex-col gap-10'>
+            <div className='flex flex-col gap-4'>
                 <Form {...form}>
                     <form>
                         <FormField
@@ -68,7 +45,9 @@ const QuizCreation = () => {
                             name='category'
                             render={({ field }) => (
                                 <FormItem>
-                                    <FormLabel className='text-2xl font-bold uppercase'>Create your quiz!</FormLabel>
+                                    <FormLabel className='text-2xl font-bold uppercase'>
+                                        Create your quiz!
+                                    </FormLabel>
                                     <FormControl>
                                         <Select
                                             onValueChange={field.onChange}
@@ -77,7 +56,10 @@ const QuizCreation = () => {
                                             <SelectTrigger id='category'>
                                                 <SelectValue placeholder='Choose a category' />
                                             </SelectTrigger>
-                                            <SelectContent position='popper'>
+                                            <SelectContent
+                                                position='popper'
+                                                className='max-h-[10rem] overflow-auto'
+                                            >
                                                 {CATEGORIES?.map((category) => (
                                                     <SelectItem
                                                         key={category.key}
@@ -93,30 +75,61 @@ const QuizCreation = () => {
                                 </FormItem>
                             )}
                         />
+                        <FormField
+                            control={form.control}
+                            name='difficulty'
+                            render={({ field }) => (
+                                <FormItem className='mt-6'>
+                                    <FormControl>
+                                        <Select
+                                            onValueChange={field.onChange}
+                                            defaultValue={field.value}
+                                        >
+                                            <SelectTrigger id='difficulty'>
+                                                <SelectValue placeholder='Choose a difficulty' />
+                                            </SelectTrigger>
+                                            <SelectContent position='popper'>
+                                                <SelectItem value='easy'>
+                                                    Easy
+                                                </SelectItem>
+                                                <SelectItem value='medium'>
+                                                    Medium
+                                                </SelectItem>
+                                                <SelectItem value='hard'>
+                                                    Hard
+                                                </SelectItem>
+                                            </SelectContent>
+                                        </Select>
+                                    </FormControl>
+                                </FormItem>
+                            )}
+                        />
+                        <FormField
+                            control={form.control}
+                            name='amount'
+                            render={({ field }) => (
+                                <FormItem>
+                                    <FormControl>
+                                        {/* <Select
+                                    onValueChange={field.onChange}
+                                    defaultValue={field.value?.toString()}
+                                    >
+                                        <SelectTrigger id='amount'>
+                                            <SelectValue placeholder='Choose an amount'/>
+                                        </SelectTrigger>
+                                        <SelectContent position='popper'>
+                                            <SelectItem value='1'>
+                                                1
+                                            </SelectItem>
+                                        </SelectContent>
+                                    </Select> */}
+                                        <QuizSlider onChange={field.onChange} />
+                                    </FormControl>
+                                </FormItem>
+                            )}
+                        />
                     </form>
                 </Form>
-                {/* <DropdownMenu>
-                    <DropdownMenuTrigger asChild>
-                        <Button variant={'outline'}>
-                            {category ? category : 'Choose a category'}
-                        </Button>
-                    </DropdownMenuTrigger>
-                    <DropdownMenuContent>
-                        <DropdownMenuLabel className='max-h-[12rem] overflow-y-auto'>
-                            {CATEGORIES?.map((category) => (
-                                <DropdownMenuItem
-                                    key={category.key}
-                                    onSelect={() =>
-                                        handleCategoryClick(category.text)
-                                    }
-                                >
-                                    {category.text}
-                                </DropdownMenuItem>
-                            ))}
-                        </DropdownMenuLabel>
-                    </DropdownMenuContent>
-                </DropdownMenu>
-            */}
                 <Link href={{ pathname: '/game', query: form.getValues() }}>
                     <Button className='font-extrabold uppercase'>
                         Start quiz
