@@ -14,7 +14,7 @@ import {
 import Link from 'next/link'
 import { useForm } from 'react-hook-form'
 import { zodResolver } from '@hookform/resolvers/zod'
-import { QuizForm, QuizFormSchema } from '@/schema/question'
+import { QuizForm, QuizFormSchema } from '@/schema/quiz'
 import {
     Select,
     SelectContent,
@@ -23,6 +23,7 @@ import {
     SelectValue,
 } from '../ui/select'
 import QuizSlider from './QuizSlider'
+import { Slider } from '../ui/slider'
 
 const QuizCreation = () => {
     const form = useForm<QuizForm>({
@@ -30,7 +31,7 @@ const QuizCreation = () => {
         defaultValues: {
             category: '',
             difficulty: '',
-            amount: 10,
+            amount: '',
             type: '',
         },
     })
@@ -111,19 +112,38 @@ const QuizCreation = () => {
                                 <FormItem>
                                     <FormControl>
                                         {/* <Select
-                                    onValueChange={field.onChange}
-                                    defaultValue={field.value?.toString()}
-                                    >
-                                        <SelectTrigger id='amount'>
-                                            <SelectValue placeholder='Choose an amount'/>
-                                        </SelectTrigger>
-                                        <SelectContent position='popper'>
-                                            <SelectItem value='1'>
-                                                1
-                                            </SelectItem>
-                                        </SelectContent>
-                                    </Select> */}
-                                        <QuizSlider onChange={field.onChange} />
+                                            onValueChange={field.onChange}
+                                            defaultValue={field.value?.toString()}
+                                        >
+                                            <SelectTrigger id='amount'>
+                                                <SelectValue placeholder='Choose an amount' />
+                                            </SelectTrigger>
+                                            <SelectContent position='popper'>
+                                                <SelectItem value='5'>
+                                                    5
+                                                </SelectItem>
+                                                <SelectItem value='10'>
+                                                    10
+                                                </SelectItem>
+                                                <SelectItem value='15'>
+                                                    15
+                                                </SelectItem>
+                                                <SelectItem value='20'>
+                                                    20
+                                                </SelectItem>
+                                            </SelectContent>
+                                        </Select> */}
+                                        {/* <QuizSlider
+                                            onChange={field.onChange}
+                                            defaultValue={field.value}
+                                        /> */}
+                                        <Slider
+                                            onChange={field.onChange}
+                                            // defaultValue={field.value}
+                                            max={50}
+                                            step={5}
+                                            className='mt-6'
+                                        />
                                     </FormControl>
                                 </FormItem>
                             )}
@@ -131,7 +151,10 @@ const QuizCreation = () => {
                     </form>
                 </Form>
                 <Link href={{ pathname: '/game', query: form.getValues() }}>
-                    <Button className='font-extrabold uppercase'>
+                    <Button
+                        className='font-extrabold uppercase'
+                        disabled={!Select}
+                    >
                         Start quiz
                     </Button>
                 </Link>

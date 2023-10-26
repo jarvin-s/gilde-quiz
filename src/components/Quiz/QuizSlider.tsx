@@ -3,8 +3,7 @@ import { Slider } from '../ui/slider'
 
 type SliderProps = React.ComponentProps<typeof Slider>
 
-export default function QuizSlider({className, ...props}: SliderProps) {
-
+export default function QuizSlider({ className, ...props }: SliderProps) {
     return (
         <Slider
             defaultValue={[10]}
