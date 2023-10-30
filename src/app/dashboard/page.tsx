@@ -1,4 +1,4 @@
-import QuizStartButton from '@/components/Quiz/QuizStartButton'
+import QuizCreateButton from '@/components/Quiz/QuizCreateButton'
 import { getServerSession } from 'next-auth'
 import { redirect } from 'next/navigation'
 import React from 'react'
@@ -22,7 +22,7 @@ const Dashboard = async () => {
                         with my app!
                     </h1>
                     <div className='pt-4'>
-                        <QuizStartButton/>
+                        <QuizCreateButton/>
                     </div>
                 </div>
             </div>

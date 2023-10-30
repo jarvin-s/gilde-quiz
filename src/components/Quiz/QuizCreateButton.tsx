@@ -5,7 +5,7 @@ import { Button } from '../ui/button'
 import ArrowIcon from '../ArrowIcon'
 import { useRouter } from 'next/navigation'
 
-const QuizStartButton = () => {
+const QuizCreateButton = () => {
     const router = useRouter()
 
     return (
@@ -16,11 +16,11 @@ const QuizStartButton = () => {
                     router.push('/quiz')
                 }}
             >
-                Start quiz
+                Create quiz
                 <ArrowIcon />
             </Button>
         </div>
     )
 }
 
-export default QuizStartButton
+export default QuizCreateButton

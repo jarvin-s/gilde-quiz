@@ -14,7 +14,6 @@ const Game = () => {
     useEffect(() => {
         const fetchData = async () => {
             const urlSearchParams = new URLSearchParams(window.location.search)
-            // Get the "category" parameter value from the query parameters
             const category = urlSearchParams.get('category')
             const api = `https://opentdb.com/api.php?amount=${amount}&category=${category}&difficulty=${difficulty}&type=${questionsType}`
 
