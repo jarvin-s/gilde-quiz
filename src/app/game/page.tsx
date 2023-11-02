@@ -1,37 +1,15 @@
-'use client'
+import QuizGame from '@/components/Quiz/QuizGame'
+import { getServerSession } from 'next-auth'
+import { redirect } from 'next/navigation'
+import React from 'react'
 
-import { CATEGORIES } from '@/constants'
-import { QuestionsResponse } from '@/types/Question'
-import React, { useEffect, useState } from 'react'
+const Game = async () => {
+    const session = await getServerSession()
 
-const Game = () => {
-    const [data, setData] = useState<QuestionsResponse[]>([])
-    const [curr, setCurr] = useState(0)
-    const amount = 5
-    const difficulty = 'easy'
-    const questionsType = 'multiple'
-
-    useEffect(() => {
-        const fetchData = async () => {
-            const urlSearchParams = new URLSearchParams(window.location.search)
-            const category = urlSearchParams.get('category')
-            const api = `https://opentdb.com/api.php?amount=${amount}&category=${category}&difficulty=${difficulty}&type=${questionsType}`
-
-            try {
-                const response = await fetch(api)
-                if (response.ok) {
-                    const data = await response.json()
-                    setData(data.results)
-                }
-            } catch (error) {
-                console.log(error)
-            }
-        }
-
-        fetchData()
-    }, [])
-
-    return <div className='flex justify-center p-24'></div>
+    if (!session?.user) {
+        redirect('/')
+    }
+    return <QuizGame />
 }
 
 export default Game

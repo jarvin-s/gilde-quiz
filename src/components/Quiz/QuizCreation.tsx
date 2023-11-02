@@ -109,11 +109,11 @@ const QuizCreation = () => {
                             control={form.control}
                             name='amount'
                             render={({ field }) => (
-                                <FormItem>
+                                <FormItem className='mt-6'>
                                     <FormControl>
-                                        {/* <Select
+                                        <Select
                                             onValueChange={field.onChange}
-                                            defaultValue={field.value?.toString()}
+                                            defaultValue={field.value}
                                         >
                                             <SelectTrigger id='amount'>
                                                 <SelectValue placeholder='Choose an amount' />
@@ -132,29 +132,50 @@ const QuizCreation = () => {
                                                     20
                                                 </SelectItem>
                                             </SelectContent>
-                                        </Select> */}
+                                        </Select>
                                         {/* <QuizSlider
                                             onChange={field.onChange}
                                             defaultValue={field.value}
                                         /> */}
-                                        <Slider
+                                        {/* <Slider
                                             onChange={field.onChange}
                                             // defaultValue={field.value}
                                             max={50}
                                             step={5}
                                             className='mt-6'
-                                        />
+                                        /> */}
                                     </FormControl>
+                                </FormItem>
+                            )}
+                        />
+                        <FormField
+                            control={form.control}
+                            name='type'
+                            render={({ field }) => (
+                                <FormItem className='mt-6'>
+                                    <Select
+                                        onValueChange={field.onChange}
+                                        defaultValue={field.value}
+                                    >
+                                        <SelectTrigger id='amount'>
+                                            <SelectValue placeholder='Choose a question type' />
+                                        </SelectTrigger>
+                                        <SelectContent position='popper'>
+                                            <SelectItem value='multiple'>
+                                                Multiple choice
+                                            </SelectItem>
+                                            <SelectItem value='boolean'>
+                                                True/false
+                                            </SelectItem>
+                                        </SelectContent>
+                                    </Select>
                                 </FormItem>
                             )}
                         />
                     </form>
                 </Form>
                 <Link href={{ pathname: '/game', query: form.getValues() }}>
-                    <Button
-                        className='font-extrabold uppercase'
-                        disabled={!Select}
-                    >
+                    <Button className='font-extrabold uppercase'>
                         Start quiz
                     </Button>
                 </Link>
