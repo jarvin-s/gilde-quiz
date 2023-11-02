@@ -9,7 +9,11 @@ const Game = async () => {
     if (!session?.user) {
         redirect('/')
     }
-    return <QuizGame />
+    return (
+        <>
+            <QuizGame />
+        </>
+    )
 }
 
 export default Game
