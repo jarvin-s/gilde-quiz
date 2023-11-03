@@ -10,8 +10,8 @@ const QuizGame = () => {
     useEffect(() => {
         const fetchData = async () => {
             const urlSearchParams = new URLSearchParams(window.location.search)
-            const category = urlSearchParams.get('category')
             const amount = urlSearchParams.get('amount')
+            const category = urlSearchParams.get('category')
             const difficulty = urlSearchParams.get('difficulty')
             const type = urlSearchParams.get('type')
             const api = `https://opentdb.com/api.php?amount=${amount}&category=${category}&difficulty=${difficulty}&type=${type}`
@@ -29,6 +29,7 @@ const QuizGame = () => {
 
         fetchData()
     }, [])
+
     return (
         <div className='flex justify-center p-24'>
             <ul>

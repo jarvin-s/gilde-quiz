@@ -157,7 +157,7 @@ const QuizCreation = () => {
                                         onValueChange={field.onChange}
                                         defaultValue={field.value}
                                     >
-                                        <SelectTrigger id='amount'>
+                                        <SelectTrigger id='type'>
                                             <SelectValue placeholder='Choose a question type' />
                                         </SelectTrigger>
                                         <SelectContent position='popper'>
