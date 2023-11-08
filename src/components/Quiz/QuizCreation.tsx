@@ -36,6 +36,9 @@ const QuizCreation = () => {
         },
     })
 
+    const queryParams = new URLSearchParams(form.getValues())
+    const cleanURL = `/game?${queryParams.toString()}`
+
     return (
         <div className='flex min-h-screen justify-center p-24'>
             <div className='flex flex-col gap-4'>
@@ -174,7 +177,7 @@ const QuizCreation = () => {
                         />
                     </form>
                 </Form>
-                <Link href={{ pathname: '/game', query: form.getValues() }}>
+                <Link href={cleanURL}>
                     <Button className='font-extrabold uppercase'>
                         Start quiz
                     </Button>

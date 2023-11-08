@@ -1,11 +1,11 @@
 import { cn } from '@/lib/utils'
 import './globals.css'
 import type { Metadata } from 'next'
-import { Mooli } from 'next/font/google'
+import { Lato } from 'next/font/google'
 import Providers from '@/components/Providers'
 import Navbar from '@/components/Header/Navbar'
 
-const mooli = Mooli({
+const lato = Lato({
     subsets: ['latin'],
     weight: '400',
 })
@@ -24,7 +24,7 @@ export default function RootLayout({
         <html lang='en'>
             <body
                 className={cn(
-                    mooli.className,
+                    lato.className,
                     'min-h-screen pt-16 antialiased'
                 )}
             >
