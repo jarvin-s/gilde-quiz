@@ -178,7 +178,16 @@ const QuizCreation = () => {
                     </form>
                 </Form>
                 <Link href={cleanURL}>
-                    <Button className='font-extrabold uppercase'>
+                    <Button
+                        className='quiz-create font-extrabold uppercase'
+                        disabled={
+                            !form.formState.isValid ||
+                            !form.getValues('category') ||
+                            !form.getValues('difficulty') ||
+                            !form.getValues('amount') ||
+                            !form.getValues('type')
+                        }
+                    >
                         Start quiz
                     </Button>
                 </Link>
