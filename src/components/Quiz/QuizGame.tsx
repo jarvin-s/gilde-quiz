@@ -1,9 +1,18 @@
 'use client'
 
-import { QuestionsResponse } from '@/types/Question'
+import { Question, QuestionsResponse } from '@/types/Question'
 import React, { useEffect, useState } from 'react'
+import QuizItem from '@/components/Quiz/QuizItem'
 
-const QuizGame = () => {
+interface QuizQuestionProps {
+    correctAnswer: number
+    currentQuestion: number
+    totalQuestions: number
+    question: Question
+    onNext: (isCorrect: boolean) => void
+}
+
+function QuizGame(props: QuizQuestionProps) {
     const [data, setData] = useState<QuestionsResponse[]>([])
     const [curr, setCurr] = useState(0)
 
@@ -32,7 +41,7 @@ const QuizGame = () => {
 
     return (
         <div className='flex justify-center p-24'>
-            <ul>
+            {/* <ul>
                 {data.map((questions, index) => (
                     <li className='p-4' key={index}>
                         <p>Question: {questions.question}</p>
@@ -44,7 +53,13 @@ const QuizGame = () => {
                         </p>
                     </li>
                 ))}
-            </ul>
+            </ul> */}
+            {props.correctAnswer}/{props.currentQuestion + 1}
+            <QuizItem
+                key={props.question.question}
+                question={props.question}
+                onNext={props.onNext}
+            />
         </div>
     )
 }
