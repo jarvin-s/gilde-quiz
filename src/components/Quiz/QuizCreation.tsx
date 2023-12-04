@@ -31,8 +31,8 @@ const QuizCreation = () => {
         defaultValues: {
             category: '',
             difficulty: '',
-            amount: '',
-            type: '',
+            amount: '10',
+            type: 'multiple',
         },
     })
 
@@ -117,6 +117,7 @@ const QuizCreation = () => {
                                         <Select
                                             onValueChange={field.onChange}
                                             defaultValue={field.value}
+                                            disabled
                                         >
                                             <SelectTrigger id='amount'>
                                                 <SelectValue placeholder='Choose an amount' />
@@ -159,6 +160,7 @@ const QuizCreation = () => {
                                     <Select
                                         onValueChange={field.onChange}
                                         defaultValue={field.value}
+                                        disabled
                                     >
                                         <SelectTrigger id='type'>
                                             <SelectValue placeholder='Choose a question type' />
@@ -183,9 +185,7 @@ const QuizCreation = () => {
                         disabled={
                             !form.formState.isValid ||
                             !form.getValues('category') ||
-                            !form.getValues('difficulty') ||
-                            !form.getValues('amount') ||
-                            !form.getValues('type')
+                            !form.getValues('difficulty')
                         }
                     >
                         Start quiz
