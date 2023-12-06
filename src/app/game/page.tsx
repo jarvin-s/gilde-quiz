@@ -1,3 +1,5 @@
+'use client'
+
 import QuizGame from '@/components/Quiz/QuizGame'
 import { getServerSession } from 'next-auth'
 import { redirect, useSearchParams } from 'next/navigation'
@@ -5,13 +7,19 @@ import { useQuery } from '@tanstack/react-query'
 import { getQuestions } from '../data/questions'
 import React from 'react'
 import { QuizForm } from '@/schema/quiz'
+import { useAppDispatch } from '../store'
+import {
+    increaseTotalQuestionsAnswered,
+    increaseTotalQuestionsAnsweredCorrectly,
+} from '../store/quiz/slice'
 
-const Game = async () => {
-    const session = await getServerSession()
+export default function Game() {
+    // const session = await getServerSession()
 
-    if (!session?.user) {
-        redirect('/')
-    }
+    // if (!session?.user) {
+    //     redirect('/')
+    // }
+    const appDispatch = useAppDispatch()
 
     const params = useSearchParams()
     const parameters: QuizForm = {
@@ -22,7 +30,7 @@ const Game = async () => {
     }
 
     const { data, error } = useQuery({
-        queryKey: ['question', parameters],
+        queryKey: ['questions', parameters],
         queryFn: async () => {
             const data = await getQuestions(parameters)
             return data
@@ -34,15 +42,24 @@ const Game = async () => {
 
     return (
         <>
-            <QuizGame
-                correctAnswer={correctAnswer}
-                currentQuestion={currentQuestion}
-                totalQuestions={data.length}
-                question={data[currentQuestion]}
-                onNext={(isCorrect) => {}}
-            />
+            <div>
+                <QuizGame
+                    correctAnswer={correctAnswer}
+                    currentQuestion={currentQuestion}
+                    totalQuestions={data.length}
+                    question={data[currentQuestion]}
+                    onNext={(isCorrect) => {
+                        if (isCorrect) {
+                            setCorrectAnswer(correctAnswer + 1)
+                            appDispatch(
+                                increaseTotalQuestionsAnsweredCorrectly()
+                            )
+                        }
+                        setCurrentQuestion(currentQuestion + 1)
+                        appDispatch(increaseTotalQuestionsAnswered())
+                    }}
+                />
+            </div>
         </>
     )
 }
-
-export default Game

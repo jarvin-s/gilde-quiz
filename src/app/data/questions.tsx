@@ -8,6 +8,6 @@ export async function getQuestions(params: QuizForm): Promise<Question[]> {
     if (!res.ok) {
         throw new Error('Error whilst fetching questions')
     }
-    const response = (await res.json() as QuestionsResponse)
+    const response = (await res.json()) as QuestionsResponse
     return response.results
 }

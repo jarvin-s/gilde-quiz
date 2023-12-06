@@ -23,10 +23,7 @@ export default function RootLayout({
     return (
         <html lang='en'>
             <body
-                className={cn(
-                    lato.className,
-                    'min-h-screen pt-16 antialiased'
-                )}
+                className={cn(lato.className, 'min-h-screen pt-16 antialiased')}
             >
                 <Providers>
                     <Navbar />

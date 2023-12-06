@@ -1,8 +1,8 @@
 import * as z from 'zod'
 
 export const QuizFormSchema = z.object({
-    category: z.string().optional(),
-    difficulty: z.string().optional(),
+    category: z.string().nullish(),
+    difficulty: z.string().nullish(),
     type: z.string().default('multiple'),
     amount: z.string().default('10')
 })

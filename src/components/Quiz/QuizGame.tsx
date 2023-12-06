@@ -3,7 +3,7 @@
 import { Question, QuestionsResponse } from '@/types/Question'
 import React, { useEffect, useState } from 'react'
 import QuizItem from '@/components/Quiz/QuizItem'
-
+4
 interface QuizQuestionProps {
     correctAnswer: number
     currentQuestion: number
@@ -15,29 +15,6 @@ interface QuizQuestionProps {
 function QuizGame(props: QuizQuestionProps) {
     const [data, setData] = useState<QuestionsResponse[]>([])
     const [curr, setCurr] = useState(0)
-
-    useEffect(() => {
-        const fetchData = async () => {
-            const urlSearchParams = new URLSearchParams(window.location.search)
-            const amount = urlSearchParams.get('amount')
-            const category = urlSearchParams.get('category')
-            const difficulty = urlSearchParams.get('difficulty')
-            const type = urlSearchParams.get('type')
-            const api = `https://opentdb.com/api.php?amount=${amount}&category=${category}&difficulty=${difficulty}&type=${type}`
-
-            try {
-                let response = await fetch(api)
-                if (response.ok) {
-                    const data = await response.json()
-                    setData(data.results)
-                }
-            } catch (error) {
-                console.log(error)
-            }
-        }
-
-        fetchData()
-    }, [])
 
     return (
         <div className='flex justify-center p-24'>
