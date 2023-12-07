@@ -22,8 +22,6 @@ import {
     SelectTrigger,
     SelectValue,
 } from '../ui/select'
-import QuizSlider from './QuizSlider'
-import { Slider } from '../ui/slider'
 
 const QuizCreation = () => {
     const form = useForm<QuizForm>({
@@ -35,9 +33,6 @@ const QuizCreation = () => {
             type: 'multiple',
         },
     })
-
-    const queryParams = new URLSearchParams(form.getValues())
-    const cleanURL = `/game?${queryParams.toString()}`
 
     return (
         <div className='flex min-h-screen justify-center p-24'>
@@ -55,7 +50,7 @@ const QuizCreation = () => {
                                     <FormControl>
                                         <Select
                                             onValueChange={field.onChange}
-                                            defaultValue={field.value}
+                                            defaultValue={field.value!}
                                         >
                                             <SelectTrigger id='category'>
                                                 <SelectValue placeholder='Choose a category' />
@@ -87,7 +82,7 @@ const QuizCreation = () => {
                                     <FormControl>
                                         <Select
                                             onValueChange={field.onChange}
-                                            defaultValue={field.value}
+                                            defaultValue={field.value!}
                                         >
                                             <SelectTrigger id='difficulty'>
                                                 <SelectValue placeholder='Choose a difficulty' />
@@ -179,7 +174,7 @@ const QuizCreation = () => {
                         />
                     </form>
                 </Form>
-                <Link href={cleanURL}>
+                <Link href={{pathname: '/game', query: form.getValues()}}>
                     <Button
                         className='quiz-create font-extrabold uppercase'
                         disabled={
