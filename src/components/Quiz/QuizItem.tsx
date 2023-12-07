@@ -43,7 +43,7 @@ const QuestionItem = ({ question, onNext }: QuestionProps) => {
                 {shuffledAnswers.map((option) => (
                     <button
                         key={option}
-                        className={`rounded-lg bg-gray-200 p-5 shadow-md transition-all duration-1000 hover:shadow-lg ${
+                        className={`rounded-lg p-5 hover:bg-yellow-400 shadow-md transition-all duration-300 hover:shadow-lg ${
                             selectedAnswer && selectedAnswer === option
                                 ? isCorrectAnswer(selectedAnswer)
                                     ? 'bg-green-400'
@@ -51,7 +51,7 @@ const QuestionItem = ({ question, onNext }: QuestionProps) => {
                                 : selectedAnswer &&
                                   option === question.correct_answer
                                 ? 'bg-green-400'
-                                : 'bg-gray-200'
+                                : 'bg-gray-600'
                         }`}
                         // className='bg-white text-black p-4 rounded-md'
                         onClick={() => submitAnswer(option)}

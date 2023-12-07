@@ -12,6 +12,7 @@ import {
     increaseTotalQuestionsAnswered,
     increaseTotalQuestionsAnsweredCorrectly,
 } from '../store/quiz/slice'
+import { Skeleton } from '@/components/ui/skeleton'
 
 export default function Game() {
     // const session = await getServerSession()
@@ -29,7 +30,7 @@ export default function Game() {
         amount: params.get('amount') || '',
     }
 
-    const { data, error } = useQuery({
+    const { data, isLoading, error } = useQuery({
         queryKey: ['questions', parameters],
         queryFn: async () => {
             const data = await getQuestions(parameters)
@@ -43,22 +44,33 @@ export default function Game() {
     return (
         <>
             <div>
-                <QuizGame
-                    correctAnswer={correctAnswer}
-                    currentQuestion={currentQuestion}
-                    totalQuestions={data.length}
-                    question={data[currentQuestion]}
-                    onNext={(isCorrect) => {
-                        if (isCorrect) {
-                            setCorrectAnswer(correctAnswer + 1)
-                            appDispatch(
-                                increaseTotalQuestionsAnsweredCorrectly()
-                            )
-                        }
-                        setCurrentQuestion(currentQuestion + 1)
-                        appDispatch(increaseTotalQuestionsAnswered())
-                    }}
-                />
+                {isLoading ? (
+                    <div className='flex h-screen items-center justify-center'>
+                        <Skeleton className='h-12 w-12 rounded-full' />
+                        <div className='space-y-2'>
+                            <Skeleton className='h-4 w-[250px]' />
+                            <Skeleton className='h-4 w-[200px]' />
+                        </div>
+                    </div>
+                ) : error || !data ? (
+                    <div className='flex h-screen justify-center p-24 text-4xl font-bold text-red-500'>
+                        ERROR: Quiz not found!
+                    </div>
+                ) : currentQuestion < data.length ? (
+                    <QuizGame
+                        correctAnswer={correctAnswer}
+                        currentQuestion={currentQuestion}
+                        question={data[currentQuestion]}
+                        onNext={(isCorrect) => {
+                            if (isCorrect) {
+                                setCorrectAnswer(correctAnswer + 1)
+                            }
+                            setCurrentQuestion(currentQuestion + 1)
+                        }}
+                    />
+                ) : (
+                    <div className='text-xl'>Quiz finished!</div>
+                )}
             </div>
         </>
     )
