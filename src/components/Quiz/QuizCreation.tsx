@@ -132,17 +132,6 @@ const QuizCreation = () => {
                                                 </SelectItem>
                                             </SelectContent>
                                         </Select>
-                                        {/* <QuizSlider
-                                            onChange={field.onChange}
-                                            defaultValue={field.value}
-                                        /> */}
-                                        {/* <Slider
-                                            onChange={field.onChange}
-                                            // defaultValue={field.value}
-                                            max={50}
-                                            step={5}
-                                            className='mt-6'
-                                        /> */}
                                     </FormControl>
                                 </FormItem>
                             )}

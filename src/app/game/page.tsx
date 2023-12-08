@@ -20,6 +20,7 @@ export default function Game() {
     // if (!session?.user) {
     //     redirect('/')
     // }
+
     const appDispatch = useAppDispatch()
 
     const params = useSearchParams()
@@ -40,7 +41,6 @@ export default function Game() {
 
     const [currentQuestion, setCurrentQuestion] = React.useState(0)
     const [correctAnswer, setCorrectAnswer] = React.useState(0)
-
     return (
         <>
             <div>
@@ -64,12 +64,24 @@ export default function Game() {
                         onNext={(isCorrect) => {
                             if (isCorrect) {
                                 setCorrectAnswer(correctAnswer + 1)
+                                appDispatch(
+                                    increaseTotalQuestionsAnsweredCorrectly()
+                                )
                             }
                             setCurrentQuestion(currentQuestion + 1)
+                            appDispatch(increaseTotalQuestionsAnswered())
                         }}
                     />
                 ) : (
-                    <div className='text-xl'>Quiz finished!</div>
+                    <div className='flex min-h-screen flex-col items-center justify-center'>
+                        <div className='text-4xl'>Quiz finished!</div>
+                        <span className='font-bold uppercase'>
+                            Total questions: {data.length}
+                        </span>
+                        <span className='font-bold text-green-500'>
+                            Correct answers: {correctAnswer}
+                        </span>
+                    </div>
                 )}
             </div>
         </>
