@@ -2,6 +2,7 @@
 
 import React from 'react'
 import { Question } from '@/types/Question'
+import { Button } from '../ui/button'
 
 interface QuestionProps {
     question: Question
@@ -41,7 +42,7 @@ const QuestionItem = ({ question, onNext }: QuestionProps) => {
             />
             <div className='flex flex-col gap-5'>
                 {shuffledAnswers.map((option) => (
-                    <button
+                    <Button
                         key={option}
                         className={`rounded-lg p-5 hover:bg-yellow-400 shadow-md transition-all duration-300 hover:shadow-lg ${
                             selectedAnswer && selectedAnswer === option
@@ -51,12 +52,12 @@ const QuestionItem = ({ question, onNext }: QuestionProps) => {
                                 : selectedAnswer &&
                                   option === question.correct_answer
                                 ? 'bg-green-400'
-                                : 'bg-gray-600'
+                                : 'bg-yellow-500'
                         }`}
                         onClick={() => submitAnswer(option)}
                     >
                         <div dangerouslySetInnerHTML={{ __html: option }} />
-                    </button>
+                    </Button>
                 ))}
             </div>
         </div>
