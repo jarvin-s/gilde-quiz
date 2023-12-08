@@ -53,7 +53,6 @@ const QuestionItem = ({ question, onNext }: QuestionProps) => {
                                 ? 'bg-green-400'
                                 : 'bg-gray-600'
                         }`}
-                        // className='bg-white text-black p-4 rounded-md'
                         onClick={() => submitAnswer(option)}
                     >
                         <div dangerouslySetInnerHTML={{ __html: option }} />
