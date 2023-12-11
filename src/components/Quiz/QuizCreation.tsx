@@ -165,7 +165,7 @@ const QuizCreation = () => {
                 </Form>
                 <Link href={{pathname: '/game', query: form.getValues()}}>
                     <Button
-                        className='quiz-create font-extrabold uppercase'
+                        className='btn-create font-extrabold uppercase'
                         disabled={
                             !form.formState.isValid ||
                             !form.getValues('category') ||
