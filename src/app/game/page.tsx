@@ -68,7 +68,8 @@ export default function Game() {
                                 toast({
                                     title: 'Correct!',
                                     description:'You got the question right!',
-                                    variant: 'success'
+                                    variant: 'success',
+                                    duration: 2000
                                 })
                                 appDispatch(
                                     increaseTotalQuestionsAnsweredCorrectly()
@@ -78,7 +79,8 @@ export default function Game() {
                                 toast({
                                     title: 'Incorrect!',
                                     description: 'You got the question wrong.',
-                                    variant: 'destructive'
+                                    variant: 'destructive',
+                                    duration: 2000
                                 })
                             }
                             setCurrentQuestion(currentQuestion + 1)
