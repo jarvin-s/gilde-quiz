@@ -30,7 +30,12 @@ const QuestionItem = ({ question, onNext }: QuestionProps) => {
 
     React.useEffect(() => {
         if (selectedAnswer) {
-            onNext(selectedAnswer === question.correct_answer)
+            const interval = setInterval(() => {
+                onNext(selectedAnswer === question.correct_answer)
+            }, 1000)
+            return () => {
+                clearInterval(interval)
+            }
         }
     }, [onNext, question, selectedAnswer])
 
@@ -44,11 +49,11 @@ const QuestionItem = ({ question, onNext }: QuestionProps) => {
                 {shuffledAnswers.map((option) => (
                     <Button
                         key={option}
-                        className={`rounded-lg p-5 hover:bg-yellow-400 shadow-md transition-all duration-300 hover:shadow-lg ${
+                        className={`rounded-lg p-5 shadow-md transition-all duration-300 hover:bg-yellow-400 hover:shadow-lg ${
                             selectedAnswer && selectedAnswer === option
                                 ? isCorrectAnswer(selectedAnswer)
                                     ? 'bg-green-400'
-                                    : 'bg-red-400'
+                                    : 'bg-red-500'
                                 : selectedAnswer &&
                                   option === question.correct_answer
                                 ? 'bg-green-400'

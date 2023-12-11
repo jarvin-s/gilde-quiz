@@ -13,6 +13,7 @@ import {
     increaseTotalQuestionsAnsweredCorrectly,
 } from '../store/quiz/slice'
 import { Skeleton } from '@/components/ui/skeleton'
+import { toast } from '@/components/ui/use-toast'
 
 export default function Game() {
     // const session = await getServerSession()
@@ -64,9 +65,21 @@ export default function Game() {
                         onNext={(isCorrect) => {
                             if (isCorrect) {
                                 setCorrectAnswer(correctAnswer + 1)
+                                toast({
+                                    title: 'Correct!',
+                                    description:'You got the question right!',
+                                    variant: 'success'
+                                })
                                 appDispatch(
                                     increaseTotalQuestionsAnsweredCorrectly()
                                 )
+                            }
+                            else {
+                                toast({
+                                    title: 'Incorrect!',
+                                    description: 'You got the question wrong.',
+                                    variant: 'destructive'
+                                })
                             }
                             setCurrentQuestion(currentQuestion + 1)
                             appDispatch(increaseTotalQuestionsAnswered())
