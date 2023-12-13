@@ -40,28 +40,33 @@ const QuestionItem = ({ question, onNext }: QuestionProps) => {
     }, [onNext, question, selectedAnswer])
 
     return (
-        <div className='mt-5 grid gap-5 sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-2'>
+        <div>
             <div
                 dangerouslySetInnerHTML={{ __html: question.question }}
-                className='font-medium sm:text-xl md:text-2xl lg:text-3xl'
+                className='text-2xl'
             />
-            <div className='flex flex-col gap-5'>
-                {shuffledAnswers.map((option) => (
+            <div className='mt-4 flex flex-col gap-5'>
+                {shuffledAnswers.map((option, index) => (
                     <Button
                         key={option}
-                        className={`rounded-lg p-5 shadow-md transition-all duration-300 hover:bg-yellow-400 hover:shadow-lg ${
+                        className={`rounded-lg p-5 text-white shadow-md transition-all duration-300 hover:bg-yellow-400 hover:shadow-lg ${
                             selectedAnswer && selectedAnswer === option
                                 ? isCorrectAnswer(selectedAnswer)
-                                    ? 'bg-green-400'
-                                    : 'bg-red-500'
+                                    ? 'bg-green-500'
+                                    : 'bg-red-600'
                                 : selectedAnswer &&
                                   option === question.correct_answer
-                                ? 'bg-green-400'
+                                ? 'bg-green-500'
                                 : 'bg-yellow-500'
                         }`}
-                        onClick={() => submitAnswer(option)}
+                        onClick={() => setSelectedAnswer(option)}
                     >
-                        <div dangerouslySetInnerHTML={{ __html: option }} />
+                        <div className='flex items-center justify-start'>
+                            <div className='mr-5 rounded-md border p-2 px-3'>
+                                {index + 1}.
+                            </div>
+                            <div dangerouslySetInnerHTML={{ __html: option }} />
+                        </div>
                     </Button>
                 ))}
             </div>
