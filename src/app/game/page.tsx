@@ -38,6 +38,10 @@ export default function Game() {
             const data = await getQuestions(parameters)
             return data
         },
+        refetchOnWindowFocus: false,
+        refetchOnMount: false,
+        refetchOnReconnect: false,
+        gcTime: 0
     })
 
     const [currentQuestion, setCurrentQuestion] = React.useState(0)

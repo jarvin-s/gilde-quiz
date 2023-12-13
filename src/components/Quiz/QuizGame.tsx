@@ -13,9 +13,10 @@ interface QuizQuestionProps {
 
 function QuizGame(props: QuizQuestionProps) {
     return (
-        <div className='flex justify-center p-24'>
-            <div className='flex-1'>
-                {props.correctAnswer}/{props.currentQuestion + 1}
+        <div className='m-24 flex justify-center border-2 border-yellow-300 p-16'>
+            <div className='mr-6 mt-2 font-bold'>
+                Correct: {props.correctAnswer} /
+                Total: {props.currentQuestion + 1}
             </div>
             <QuizItem
                 key={props.question.question}
