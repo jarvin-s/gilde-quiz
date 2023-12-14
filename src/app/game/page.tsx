@@ -17,12 +17,6 @@ import { toast } from '@/components/ui/use-toast'
 import QuizResult from '@/components/Quiz/QuizResult'
 
 export default function Game() {
-    // const session = await getServerSession()
-
-    // if (!session?.user) {
-    //     redirect('/')
-    // }
-
     const appDispatch = useAppDispatch()
 
     const params = useSearchParams()
@@ -91,10 +85,7 @@ export default function Game() {
                     }}
                 />
             ) : (
-                <QuizResult
-                total={data.length}
-                correct={correctAnswer}
-                 />
+                <QuizResult total={data.length} correct={correctAnswer} />
             )}
         </>
     )
