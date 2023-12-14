@@ -9,7 +9,7 @@ interface QuestionProps {
     onNext: (isCorrect: boolean) => void
 }
 
-const QuestionItem = ({ question, onNext }: QuestionProps) => {
+const QuizItem = ({ question, onNext }: QuestionProps) => {
     const shuffledAnswers = React.useMemo(
         () =>
             [...question.incorrect_answers, question.correct_answer].sort(
@@ -59,7 +59,7 @@ const QuestionItem = ({ question, onNext }: QuestionProps) => {
                                 ? 'bg-green-500'
                                 : 'bg-yellow-500'
                         }`}
-                        onClick={() => setSelectedAnswer(option)}
+                        onClick={() => submitAnswer(option)}
                     >
                         <div className='flex items-center justify-start'>
                             <div className='mr-5 rounded-md border p-2 px-3'>
@@ -74,4 +74,4 @@ const QuestionItem = ({ question, onNext }: QuestionProps) => {
     )
 }
 
-export default React.memo(QuestionItem)
+export default React.memo(QuizItem)
