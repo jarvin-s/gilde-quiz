@@ -14,7 +14,7 @@ import {
 } from '../store/quiz/slice'
 import { Skeleton } from '@/components/ui/skeleton'
 import { toast } from '@/components/ui/use-toast'
-import QuizResults from '@/components/Quiz/QuizResults'
+import QuizResult from '@/components/Quiz/QuizResult'
 
 export default function Game() {
     // const session = await getServerSession()
@@ -91,7 +91,7 @@ export default function Game() {
                     }}
                 />
             ) : (
-                <QuizResults
+                <QuizResult
                 total={data.length}
                 correct={correctAnswer}
                  />

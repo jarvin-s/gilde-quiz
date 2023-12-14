@@ -8,7 +8,7 @@ interface QuizResultsProps {
     correct: number
 }
 
-function QuizResults(props: QuizResultsProps) {
+function QuizResult(props: QuizResultsProps) {
     return (
         <div className='flex min-h-screen flex-col items-center justify-center'>
             <div className='text-4xl'>Quiz finished!</div>
@@ -25,4 +25,4 @@ function QuizResults(props: QuizResultsProps) {
     )
 }
 
-export default QuizResults
+export default QuizResult
