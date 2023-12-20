@@ -62,6 +62,10 @@
     background: #facc15;
 }
 
+html {
+    overflow-y: scroll;
+}
+
 .btn-create {
     background-origin: border-box;
     box-shadow: none;
