@@ -37,7 +37,7 @@ const QuizCreation = () => {
     return (
         <div className='flex min-h-screen justify-center p-24'>
             <div className='flex flex-col'>
-                <div className='rounded-lg border-2 border-b-4 border-r-4 border-yellow-500 p-10'>
+                <div className='rounded-lg border-2 border-b-4 border-l-4 border-yellow-500 p-10'>
                     <Form {...form}>
                         <form>
                             <FormField
