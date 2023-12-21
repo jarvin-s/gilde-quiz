@@ -6,7 +6,7 @@ import React from 'react'
 const ArrowIcon = () => {
     return (
         <div className=''>
-            <ArrowSmallRightIcon className='h-5 w-5 duration-300 hover:translate-x-1' />
+            <ArrowSmallRightIcon className='h-5 w-5' />
         </div>
     )
 }

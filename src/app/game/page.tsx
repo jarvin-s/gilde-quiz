@@ -17,12 +17,6 @@ import { toast } from '@/components/ui/use-toast'
 import QuizResult from '@/components/Quiz/QuizResult'
 
 export default function Game() {
-    // const session = await getServerSession()
-
-    // if (!session?.user) {
-    //     redirect('/')
-    // }
-
     const appDispatch = useAppDispatch()
 
     const params = useSearchParams()
@@ -50,11 +44,15 @@ export default function Game() {
     return (
         <>
             {isLoading ? (
-                <div className='flex h-screen items-center justify-center'>
-                    <Skeleton className='h-12 w-12 rounded-full' />
+                <div className='flex h-screen flex-col items-center justify-center'>
+                    <div className='mb-4'>
+                        <Skeleton className='h-6 w-[300px]' />
+                    </div>
                     <div className='space-y-2'>
                         <Skeleton className='h-4 w-[250px]' />
-                        <Skeleton className='h-4 w-[200px]' />
+                        <Skeleton className='h-4 w-[250px]' />
+                        <Skeleton className='h-4 w-[250px]' />
+                        <Skeleton className='h-4 w-[250px]' />
                     </div>
                 </div>
             ) : error || !data ? (
@@ -91,10 +89,7 @@ export default function Game() {
                     }}
                 />
             ) : (
-                <QuizResult
-                total={data.length}
-                correct={correctAnswer}
-                 />
+                <QuizResult total={data.length} correct={correctAnswer} />
             )}
         </>
     )
