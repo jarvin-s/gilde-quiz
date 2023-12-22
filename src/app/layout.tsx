@@ -12,7 +12,7 @@ const quicksand = Quicksand({
 })
 
 export const metadata: Metadata = {
-    title: 'Gilde Quiz',
+    title: 'Gilde Quiz | A minimalistic quiz app',
     description: 'Quiz application built as final school project',
 }
 
