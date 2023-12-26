@@ -176,7 +176,7 @@ const QuizCreation = () => {
                     </Form>
                     <Link href={{ pathname: '/game', query: form.getValues() }}>
                         <Button
-                            className='btn-create mt-8 font-extrabold uppercase'
+                            className='main-btn mt-8 font-extrabold hover:text-white'
                             disabled={
                                 !form.formState.isValid ||
                                 !form.getValues('category') ||
