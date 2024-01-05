@@ -11,7 +11,7 @@ const QuizCreateButton = () => {
     return (
         <div>
             <Button
-                className='btn-start font-bold hover:text-white'
+                className='main-btn font-bold hover:text-white'
                 onClick={() => {
                     router.push('/quiz')
                 }}
