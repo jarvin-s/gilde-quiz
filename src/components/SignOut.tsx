@@ -7,7 +7,7 @@ import { Button } from './ui/button'
 const SignOut = () => {
     return (
         <div>
-            <Button onClick={() => signOut()}>Sign out</Button>
+            <Button className='main-btn hover:text-white' onClick={() => signOut()}>Sign out</Button>
         </div>
     )
 }
